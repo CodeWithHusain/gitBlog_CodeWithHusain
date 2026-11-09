@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hussain Sitamouwala</title>
+<meta name="description" content="Notes on contributing to Git">
+<meta name="color-scheme" content="light dark">
+<meta property="og:title" content="Hussain Sitamouwala">
+<meta property="og:description" content="Notes on contributing to Git">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%BB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f1ec;--win:#fbfaf7;--bar:#e4e1d9;--fg:#23262b;--dim:#6b7078;--accent:#0a7a5a;--link:#1f5fbf;--line:#d6d2c8}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--win:#161920;--bar:#232731;--fg:#d7dae0;--dim:#8a909b;--accent:#5fd3a6;--link:#7db4ff;--line:#2c313c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 15px/1.7 "IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;padding:20px 14px}
+.win{max-width:760px;margin:0 auto;background:var(--win);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.bar{display:flex;align-items:center;gap:8px;background:var(--bar);padding:9px 14px;font-size:12px;color:var(--dim)}
+.dot{width:11px;height:11px;border-radius:50%;background:var(--dim);opacity:.5}
+.bar .t{margin-left:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+nav{display:flex;gap:18px;padding:14px 20px 0}
+nav a{color:var(--link);text-decoration:none}
+nav a[aria-current="page"]{color:var(--accent);font-weight:600}
+nav a:hover{text-decoration:underline}
+main{padding:10px 20px 20px}
+.p{color:var(--accent);font-weight:600}
+h2{font-size:15px;margin:22px 0 6px;font-weight:600}
+p{margin:8px 0;max-width:68ch}
+a{color:var(--link)}
+ul{padding-left:20px;margin:8px 0}
+.post{display:flex;gap:14px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.post time{color:var(--dim);flex:none}
+.line{display:flex;gap:8px;align-items:center;margin:8px 0}
+.line .p{flex:none}
+#cmd{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--fg);font:inherit;caret-color:var(--accent);padding:0}
+.out{margin:2px 0 8px;white-space:pre-wrap;max-width:68ch}
+.view{display:none}.view.on{display:block}
+footer{padding:0 20px 18px;font-size:13px}
+@media (max-width:520px){.post{flex-direction:column;gap:0}}
+</style>
+</head>
+<body>
+<div class="win">
+  <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="t" id="title">hussain@codewithhusain.github.io: ~ - zsh - 80 × 24</span></div>
+  <nav>
+    <a href="#home" data-v="home">home</a>
+    <a href="#about" data-v="about">about</a>
+  </nav>
+  <main>
+    <section class="view" id="home">
+      <p><span class="p">hussain@codewithhusain:~$</span> cat greet.txt</p>
+      <p>Hello from my notes on contributing to Git :)</p>
+      <div id="posts" hidden>
+        <p><span class="p">hussain@codewithhusain:~$</span> ls posts/</p>
+        <div id="list"></div>
+      </div>
+      <div id="log" aria-live="polite"></div>
+      <div class="line"><span class="p">hussain@codewithhusain:~$</span><input id="cmd" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type a command" placeholder="type help"></div>
+    </section>
+
+    <section class="view" id="about">
+      <p><span class="p">hussain@codewithhusain:~$</span> cat about.md</p>
+      <p>Hey everyone, I’m Hussain, a developer who loves building things and figuring out how they work. Solving technical problems is my thing, because it gives me the sense that I’m making an impact somewhere.</p>
+      <p><span class="p">hussain@codewithhusain:~$</span> cat github.md</p>
+      <h2>GitHub</h2>
+      <ul>
+        <li><a href="https://github.com/CodeWithHusain">github.com/CodeWithHusain</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer><a href="https://github.com/CodeWithHusain">github.com/CodeWithHusain</a></footer>
+</div>
+<script>
+// Add posts here, newest last: {d:"2026-11-16",t:"Week 1: title",u:"https://..."}
+var POSTS=[];
+if(POSTS.length){
+  document.getElementById('list').innerHTML=POSTS.slice().reverse().map(function(p){
+    return '<div class="post"><time>'+p.d+'</time><a href="'+p.u+'">'+p.t+'</a></div>';
+  }).join('');
+  document.getElementById('posts').hidden=false;
+}
+function show(h){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id===h)});
+  document.querySelectorAll('nav a').forEach(function(a){
+    if(a.dataset.v===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+  });
+  document.getElementById('title').textContent='hussain@codewithhusain.github.io: ~/'+(h==='home'?'':h+'/')+' - zsh - 80 × 24';
+}
+function route(){show(location.hash==='#about'?'about':'home')}
+document.querySelectorAll('nav a').forEach(function(a){
+  a.addEventListener('click',function(ev){
+    ev.preventDefault();
+    show(a.dataset.v);
+    try{history.replaceState(null,'','#'+a.dataset.v)}catch(e){}
+  });
+});
+window.addEventListener('hashchange',route);route();
+var PROMPT='hussain@codewithhusain:~$ ';
+var NOPE=['not today','maybe next time','nice try :)','come back tomorrow','ask me again next time','not today, try “help”'];
+var cmd=document.getElementById('cmd'),log=document.getElementById('log'),hist=[],hi=0;
+function say(t){var d=document.createElement('div');d.className='out';d.textContent=t;log.appendChild(d)}
+function run(raw){
+  var c=raw.trim().toLowerCase();
+  var e=document.createElement('div');e.className='out';
+  var p=document.createElement('span');p.className='p';p.textContent=PROMPT;
+  e.appendChild(p);e.appendChild(document.createTextNode(raw));log.appendChild(e);
+  if(!c)return;
+  if(c==='clear'){log.innerHTML='';return}
+  if(c==='help'){say('help, ls, cat about.md, cat github.md, clear\nanything else: good luck');return}
+  if(c==='ls'){say('about.md  github.md  greet.txt');return}
+  if(c==='cat greet.txt'){say('Hello from my notes on contributing to Git :)');return}
+  if(c==='cat about.md'||c==='about'){show('about');return}
+  if(c==='cat github.md'||c==='github'){say('https://github.com/CodeWithHusain');return}
+  if(c.indexOf('sudo')===0){say('nice try :)');return}
+  say(NOPE[Math.floor(Math.random()*NOPE.length)]);
+}
+cmd.addEventListener('keydown',function(ev){
+  if(ev.key==='Enter'){var v=cmd.value;if(v.trim())hist.push(v);hi=hist.length;cmd.value='';run(v);window.scrollTo(0,document.body.scrollHeight)}
+  else if(ev.key==='ArrowUp'){if(hi>0){hi--;cmd.value=hist[hi];ev.preventDefault()}}
+  else if(ev.key==='ArrowDown'){if(hi<hist.length-1){hi++;cmd.value=hist[hi]}else{hi=hist.length;cmd.value=''}ev.preventDefault()}
+});
+document.querySelector('.win').addEventListener('click',function(ev){
+  if(document.getElementById('home').classList.contains('on')&&!window.getSelection().toString()&&ev.target.tagName!=='A')cmd.focus();
+});
+
+</script>
+</body>
+</html>
